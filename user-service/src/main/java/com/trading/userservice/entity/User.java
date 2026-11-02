@@ -1,7 +1,6 @@
 package com.trading.userservice.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,10 +12,10 @@ import java.time.LocalDateTime;
 @Table(name = "users")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
+    @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private String id;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -38,4 +37,13 @@ public class User {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    public User(String email, String firstName, String lastName, String password,
+                BigDecimal walletBalance) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.walletBalance = walletBalance;
+    }
 }
